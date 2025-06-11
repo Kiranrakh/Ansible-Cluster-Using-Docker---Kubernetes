@@ -1,3 +1,0 @@
-[node]
-<node1_ip> ansible_user=ansible
-<node2_ip> ansible_user=ansible
