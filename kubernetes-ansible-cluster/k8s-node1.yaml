@@ -1,1 +1,21 @@
-a
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node1
+  labels:
+    role: node
+spec:
+  containers:
+  - name: node
+    image: ubuntu:22.04
+    command: ["/bin/bash", "-c"]
+    args:
+      - |
+        apt-get update && \
+        apt-get install -y openssh-server sudo python3 python3-pip vim && \
+        useradd -m ansible && echo "ansible:ansible" | chpasswd && \
+        echo "ansible ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+        mkdir /var/run/sshd && \
+        /usr/sbin/sshd -D
+    ports:
+    - containerPort: 22
